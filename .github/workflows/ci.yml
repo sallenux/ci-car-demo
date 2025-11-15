@@ -24,9 +24,22 @@ jobs:
           echo "Car built successfully!"
           cat car.txt
 
+      - name: Upload car artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: car-build
+          path: build/
+          retention-days: 1
+
   test_the_car:
+    needs: build_the_car
     runs-on: ubuntu-latest
     steps:
+      - name: Download car artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: car-build
+
       - name: Test the car
         run: |
           test -f build/car.txt
@@ -34,3 +47,4 @@ jobs:
           grep "chassis" car.txt
           grep "engine" car.txt
           grep "wheels" car.txt
+          echo "All car tests passed! 🎉"
