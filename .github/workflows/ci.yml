@@ -42,9 +42,11 @@ jobs:
 
       - name: Test the car
         run: |
-          test -f build/car.txt
-          cd build
+          echo "Current directory contents:"
+          ls -la
+          echo "---"
+          test -f car.txt
           grep "chassis" car.txt
           grep "engine" car.txt
           grep "wheels" car.txt
-          echo "All car tests passed! 🎉"
+          echo "All car tests passed!"
