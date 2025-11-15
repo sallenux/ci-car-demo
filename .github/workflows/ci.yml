@@ -1,0 +1,25 @@
+name: CI Car Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_the_car:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build the car
+        run: |
+          mkdir build
+          cd build
+          touch car.txt
+          echo "chassis" >> car.txt
+          echo "engine" >> car.txt
+          echo "wheels" >> car.txt
+          echo "Car built successfully!"
+          cat car.txt
